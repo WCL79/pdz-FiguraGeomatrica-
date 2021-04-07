@@ -14,13 +14,6 @@ public class CalcularFormaDTO{
     @NotBlank (message="Esse campo não pode estar vazio")
     private String unidadeMedida;
 
-
-   //
-
-    //@Digits(integer=10, fraction=0)
-    //@DecimalMax("10.000")
-   // @DecimalMin("1")
-
     @Size(min = 1, max = 3, message = "Deve ser informado pelo meno um lado")
     private List<Double> lados;
 

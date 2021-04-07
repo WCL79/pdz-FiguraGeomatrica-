@@ -3,6 +3,7 @@ package br.com.zup.catalisa.pdz.controllers;
 import br.com.zup.catalisa.pdz.dto.CalcularFormaDTO;
 import br.com.zup.catalisa.pdz.models.FiguraGeometrica;
 import br.com.zup.catalisa.pdz.services.FiguraGeometricaServices;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,13 @@ import javax.validation.Valid;
 // desse controller terão como base o quadrado.
 public class FiguraGeometricaController {
 
-    @Autowired//essa anotação indica que os parâmetros serão injetados
+
+
+    @Autowired
     private FiguraGeometricaServices retanguloService;
 
-    @PostMapping//mapea método para grava na lista. Este método será invocado quando a
-    // url: /quadrados/, usando o método POST for acessada.
+
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public FiguraGeometrica calcularForma(@RequestBody @Valid CalcularFormaDTO calcularFormato){
         try {

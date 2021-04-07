@@ -103,7 +103,7 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
     private Triangulo calcularEquilatero(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
 
-        triangulo.setClassiicacao("Equilátero");
+        triangulo.setClassicacao("Equilátero");
         triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
         triangulo.setPerimetro(calcularPerimetro(ladoA, ladoB, ladoC));
         triangulo.setAltura(calcularDeAltura(ladoA, ladoC));
@@ -112,7 +112,7 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
     private Triangulo calcularIsoceles(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
 
-        triangulo.setClassiicacao("Isóceles");
+        triangulo.setClassicacao("Isóceles");
         triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
         triangulo.setPerimetro(calcularPerimetro(ladoA, ladoB, ladoC));
         triangulo.setAltura(calcularAlturaDoIsocele(ladoA, ladoC));
@@ -122,7 +122,7 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
     private Triangulo calcularEscaleno(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
 
-        triangulo.setClassiicacao("ESCALENO");
+        triangulo.setClassicacao("ESCALENO");
         triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
         triangulo.setPerimetro(calcularPerimetro(ladoA, ladoB, ladoC));
         triangulo.setAltura(calcularAlturaDoIsocele(ladoA, ladoC));
@@ -174,16 +174,14 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
     @Override
     public double calcularDiagonal() {
-        Double calcDiagonal = Math.sqrt((figuraGeometrica.getLados().get(0)*2));
+        Double calcDiagonal = Math.sqrt((figuraGeometrica.getLados().get(0)*4));
         DecimalFormat decimalFormat = new DecimalFormat("###.##");//Expressão regular
         calcDiagonal = Double.parseDouble(decimalFormat.format(calcDiagonal).replace(",","."));
         return calcDiagonal;
     }
 
     public double calcularDiagonal(Double ladoA, Double ladoB){
-        /*
-            ladoA ao quadro + ladoB ao quadrado
-         */
+
         Double calcDiagonal = Math.sqrt(Math.pow(ladoA,2)+ Math.pow(ladoB, 2));
         DecimalFormat decimalFormat = new DecimalFormat("###.##");//Expressão regular
         calcDiagonal = Double.parseDouble(decimalFormat.format(calcDiagonal).replace(",","."));
