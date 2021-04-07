@@ -1,8 +1,15 @@
 package br.com.zup.catalisa.pdz.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.*;
 import java.util.List;
 
+@Data//O @Data contem todos
+@NoArgsConstructor//Construtor sem argumentos
+@AllArgsConstructor//Construtor com todos argumentos
 public class FiguraGeometrica {
 
 
@@ -18,46 +25,4 @@ public class FiguraGeometrica {
     private Double perimetro;
     private Double area;
 
-    public FiguraGeometrica() {
-    }
-
-    public String getNomeDeFigura() {
-        return nomeDeFigura;
-    }
-
-    public void setNomeDeFigura(String nomeDeFigura) {
-        this.nomeDeFigura = nomeDeFigura;
-    }
-
-    public String getUnidadeMedida() {
-        return unidadeMedida;
-    }
-
-    public void setUnidadeMedida(String unidadeMedida) {
-        this.unidadeMedida = unidadeMedida;
-    }
-
-    public List<Double> getLados() {
-        return lados;
-    }
-
-    public void setLados(List<Double> lados) {
-        this.lados = lados;
-    }
-
-    public Double getPerimetro() {
-        return perimetro;
-    }
-
-    public void setPerimetro(Double perimetro) {
-        this.perimetro = perimetro;
-    }
-
-    public Double getArea() {
-        return area;
-    }
-
-    public void setArea(Double area) {
-        this.area = area;
-    }
 }
