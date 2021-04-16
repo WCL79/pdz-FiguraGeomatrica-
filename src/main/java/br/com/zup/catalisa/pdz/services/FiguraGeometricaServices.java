@@ -105,7 +105,7 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
         triangulo.setClassicacao("Equilátero");
         triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
-        triangulo.setPerimetro(calcularPerimetro(ladoA, ladoB, ladoC));
+        triangulo.setPerimetro(calcularPerimetroTrianguloEquilatero(ladoA));
         triangulo.setAltura(calcularDeAltura(ladoA, ladoC));
         return triangulo;
     }
@@ -114,7 +114,7 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
         triangulo.setClassicacao("Isóceles");
         triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
-        triangulo.setPerimetro(calcularPerimetro(ladoA, ladoB, ladoC));
+        triangulo.setPerimetro(calcularPerimetroTrianguloIsoceles(ladoA, ladoB, ladoC));
         triangulo.setAltura(calcularAlturaDoIsocele(ladoA, ladoC));
         return triangulo;
 
@@ -124,7 +124,7 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
         triangulo.setClassicacao("ESCALENO");
         triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
-        triangulo.setPerimetro(calcularPerimetro(ladoA, ladoB, ladoC));
+        triangulo.setPerimetro(calcularPerimetroTrianguloEscaleno(ladoA, ladoB, ladoC));
         triangulo.setAltura(calcularAlturaDoIsocele(ladoA, ladoC));
         return triangulo;
 
@@ -168,10 +168,17 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
         return  (2 * base) + (2 * altura);
 
     }
-    public double calcularPerimetro(Double ladoA, Double ladoB, Double ladoC){
-        return  ladoA + ladoB + ladoC;
+    public double calcularPerimetroTrianguloEquilatero(Double ladoA){
+        return  3 * ladoA;
     }
 
+    public double calcularPerimetroTrianguloIsoceles(Double ladoA, Double ladoB, Double ladoC){
+        return  ladoA+ ladoB + ladoC;
+    }
+
+    public double calcularPerimetroTrianguloEscaleno(Double ladoA, Double ladoB, Double ladoC){
+        return  ladoA + ladoB + ladoC;
+    }
     @Override
     public double calcularDiagonal() {
         Double calcDiagonal = Math.sqrt((figuraGeometrica.getLados().get(0)*4));

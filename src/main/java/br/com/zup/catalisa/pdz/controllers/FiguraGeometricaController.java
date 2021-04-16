@@ -24,7 +24,7 @@ public class FiguraGeometricaController {
 
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public FiguraGeometrica calcularForma(@RequestBody @Valid CalcularFormaDTO calcularFormato){
         try {
             return retanguloService.calcularFiguraGeometrica(calcularFormato);
