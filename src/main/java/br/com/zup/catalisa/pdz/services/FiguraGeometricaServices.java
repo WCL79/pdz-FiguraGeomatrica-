@@ -145,8 +145,8 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
     private double calcularAreaTrianguloIsoceles(Double catetoA, Double catetoB, Double areaHipotenusa){
             Double  base = catetoA/2;
-            areaHipotenusa =  Math.sqrt(Math.pow(catetoB, 2)- Math.pow(base, 2)) ;
-            areaHipotenusa = catetoA * areaHipotenusa/2;
+            areaHipotenusa =  Math.sqrt(Math.pow(catetoB, 2) - Math.pow(base, 2)) ;
+            areaHipotenusa *= catetoA/2;
             return areaHipotenusa;
     }
 
