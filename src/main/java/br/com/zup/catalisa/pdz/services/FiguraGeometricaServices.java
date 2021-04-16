@@ -103,8 +103,8 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
     private Triangulo calcularEquilatero(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
 
-        triangulo.setClassicacao("Equilátero");
-        triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
+        triangulo.setClassicacao("EQUILÁTERO");
+        triangulo.setArea(calcularAreaTriangulo(ladoA, ladoB, ladoC));
         triangulo.setPerimetro(calcularPerimetroTrianguloEquilatero(ladoA));
         triangulo.setAltura(calcularDeAltura(ladoA, ladoC));
         return triangulo;
@@ -112,10 +112,10 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
 
     private Triangulo calcularIsoceles(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
 
-        triangulo.setClassicacao("Isóceles");
-        triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
+        triangulo.setClassicacao("ISÓSCELES");
+        triangulo.setArea(calcularAreaTrianguloIsoceles(ladoA, ladoB, ladoC));
         triangulo.setPerimetro(calcularPerimetroTrianguloIsoceles(ladoA, ladoB, ladoC));
-        triangulo.setAltura(calcularAlturaDoIsocele(ladoA, ladoC));
+        triangulo.setAltura(calcularDeAlturaDoTrianguloIsosceles(ladoA, ladoB, ladoC));
         return triangulo;
 
     }
@@ -123,7 +123,7 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
     private Triangulo calcularEscaleno(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
 
         triangulo.setClassicacao("ESCALENO");
-        triangulo.setArea(calcularArea(ladoA, ladoB, ladoC));
+        triangulo.setArea(calcularAreaTriangulo(ladoA, ladoB, ladoC));
         triangulo.setPerimetro(calcularPerimetroTrianguloEscaleno(ladoA, ladoB, ladoC));
         triangulo.setAltura(calcularAlturaDoIsocele(ladoA, ladoC));
         return triangulo;
@@ -139,8 +139,15 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
         return ladoA * ladoB;
     }
 
-    private double calcularArea(Double base, Double altura, Double hipotenusa){
+    private double calcularAreaTriangulo(Double ladoA, Double base, Double altura){
         return (altura * base)/2;
+    }
+
+    private double calcularAreaTrianguloIsoceles(Double catetoA, Double catetoB, Double areaHipotenusa){
+            Double  base = catetoA/2;
+            areaHipotenusa =  Math.sqrt(Math.pow(catetoB, 2)- Math.pow(base, 2)) ;
+            areaHipotenusa = catetoA * areaHipotenusa/2;
+            return areaHipotenusa;
     }
 
     private double calcularDeAltura(Double base, Double lados){
@@ -149,6 +156,12 @@ public class FiguraGeometricaServices implements CalculoDimensionalSupercial {
         DecimalFormat decimalFormat = new DecimalFormat("###.##");//Expressão regular
         calcAltura = Double.parseDouble(decimalFormat.format(calcAltura).replace(",","."));
         return calcAltura;
+    }
+
+    private double calcularDeAlturaDoTrianguloIsosceles(Double catetoA, Double catetoB, Double areaHipotenusa){
+        Double  base = catetoA/2;
+        areaHipotenusa =  Math.sqrt(Math.pow(catetoB, 2)- Math.pow(base, 2)) ;
+        return areaHipotenusa;
     }
 
     private double calcularAlturaDoIsocele(Double ladoA, Double base){
