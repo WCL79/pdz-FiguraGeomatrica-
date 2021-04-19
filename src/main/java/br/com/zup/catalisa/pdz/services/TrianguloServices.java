@@ -52,7 +52,7 @@ public class TrianguloServices implements CalculoDimensionalSupercial {
     private Triangulo calcularEquilatero(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
 
         triangulo.setClassicacao("EQUILÁTERO");
-        triangulo.setArea(calcularAreaTriangulo(ladoB, ladoC));
+        triangulo.setArea(calcularAreaTrianguloEquilatero(ladoA, ladoB, ladoC));
         triangulo.setPerimetro(calcularPerimetroTrianguloEquilatero(ladoA));
         triangulo.setAltura(calcularDeAltura(ladoA, ladoC));
         return triangulo;
@@ -115,8 +115,13 @@ public class TrianguloServices implements CalculoDimensionalSupercial {
     }
 
 
-    private double calcularAreaTriangulo(Double base, Double altura){
-        return (altura * base)/2;
+    private double calcularAreaTrianguloEquilatero(Double catetoA, Double catetoB, Double areaHipotenusa){
+
+        Double resultado = (calcularAlturaDoIsosceles(catetoB, areaHipotenusa)*areaHipotenusa)/2;
+        Double  base = catetoA/2;
+        areaHipotenusa =  Math.sqrt(Math.pow(catetoB, 2) - Math.pow(base, 2)) ;
+        areaHipotenusa *= catetoA/2;
+        return resultado;
     }
 
     private double calcularAreaTrianguloIsoceles(Double catetoA, Double catetoB, Double areaHipotenusa){
