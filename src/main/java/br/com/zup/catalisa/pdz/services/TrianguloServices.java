@@ -2,7 +2,9 @@ package br.com.zup.catalisa.pdz.services;
 
 import br.com.zup.catalisa.pdz.dto.CalcularFormaDTO;
 import br.com.zup.catalisa.pdz.models.CalculoDimensionalSupercial;
+import br.com.zup.catalisa.pdz.models.FiguraGeometrica;
 import br.com.zup.catalisa.pdz.models.Triangulo;
+import br.com.zup.catalisa.pdz.models.TrianguloEscaleno;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -19,7 +21,7 @@ public class TrianguloServices implements CalculoDimensionalSupercial {
     }
 
 
-    public Triangulo calcularAtributoTriangulo(CalcularFormaDTO calcularFormaDTO){
+    public FiguraGeometrica calcularAtributoTriangulo(CalcularFormaDTO calcularFormaDTO){
 
         Double ladoA = calcularFormaDTO.getLados().get(0);
         Double ladoB = calcularFormaDTO.getLados().get(1);
@@ -68,13 +70,14 @@ public class TrianguloServices implements CalculoDimensionalSupercial {
 
     }
 
-    private Triangulo calcularEscaleno(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
-
-        triangulo.setClassicacao("ESCALENO");
-        triangulo.setArea(calcularAreaTrianguloEscaleno(ladoA, ladoB, ladoC));
-        triangulo.setPerimetro(calcularPerimetroTrianguloEscaleno(ladoA, ladoB, ladoC));
-        triangulo.setAltura(0.0);
-        return triangulo;
+    private TrianguloEscaleno calcularEscaleno(Triangulo triangulo, Double ladoA, Double ladoB, Double ladoC){
+        TrianguloEscaleno trianguloEscaleno = new TrianguloEscaleno();
+        trianguloEscaleno.setClassicacao("ESCALENO");
+        trianguloEscaleno.setArea(calcularAreaTrianguloEscaleno(ladoA, ladoB, ladoC));
+        trianguloEscaleno.setPerimetro(calcularPerimetroTrianguloEscaleno(ladoA, ladoB, ladoC));
+        trianguloEscaleno.setLados(triangulo.getLados());
+        trianguloEscaleno.setUnidadeMedida(triangulo.getUnidadeMedida());
+        return trianguloEscaleno;
 
     }
 
@@ -85,7 +88,9 @@ public class TrianguloServices implements CalculoDimensionalSupercial {
     }
 
     @Override
-    public double calcularPerimetro() {
+    public double calcularPerimetro(
+
+    ) {
         return 0;
     }
 
@@ -125,16 +130,18 @@ public class TrianguloServices implements CalculoDimensionalSupercial {
     }
 
     private double calcularAreaTrianguloIsoceles(Double catetoA, Double catetoB, Double areaHipotenusa){
+
         Double resultado = (calcularAlturaDoIsosceles(catetoB, areaHipotenusa)*areaHipotenusa)/2;
         Double  base = catetoA/2;
         areaHipotenusa =  Math.sqrt(Math.pow(catetoB, 2) - Math.pow(base, 2)) ;
         areaHipotenusa *= catetoA/2;
+        DecimalFormat decimalFormat = new DecimalFormat("###.##");//Expressão regular
+        resultado = Double.parseDouble(decimalFormat.format(resultado).replace(",","."));
         return resultado;
     }
 
     private double calcularAreaTrianguloEscaleno(Double ladoA, Double ladoB, Double ladoC){
         Double p = (ladoA + ladoB + ladoC)/2;
-        System.out.println(p);
         Double areaEscaleno = Math.sqrt(p*(p-ladoA)*(p-ladoB)*(p-ladoC));
         DecimalFormat decimalFormat = new DecimalFormat("###.##");//Expressão regular
         areaEscaleno = Double.parseDouble(decimalFormat.format(areaEscaleno).replace(",","."));
@@ -143,7 +150,6 @@ public class TrianguloServices implements CalculoDimensionalSupercial {
 
     private double calcularAlturaDoIsosceles(Double ladoA, Double base){
         Double calcAltura = Math.sqrt(Math.pow(ladoA,2) - Math.pow(base/2, 2));
-        System.out.println(calcAltura);
         DecimalFormat decimalFormat = new DecimalFormat("###.##");//Expressão regular
         calcAltura = Double.parseDouble(decimalFormat.format(calcAltura).replace(",","."));
         System.out.println(calcAltura);
